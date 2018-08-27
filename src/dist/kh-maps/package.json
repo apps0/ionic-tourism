@@ -1,0 +1,21 @@
+{
+  "name": "kh-maps",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  },
+  "main": "bundles/kh-maps.umd.js",
+  "module": "fesm5/kh-maps.js",
+  "es2015": "fesm2015/kh-maps.js",
+  "esm5": "esm5/kh-maps.js",
+  "esm2015": "esm2015/kh-maps.js",
+  "fesm5": "fesm5/kh-maps.js",
+  "fesm2015": "fesm2015/kh-maps.js",
+  "typings": "kh-maps.d.ts",
+  "metadata": "kh-maps.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}

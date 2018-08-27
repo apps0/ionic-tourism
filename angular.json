@@ -162,6 +162,46 @@
           }
         }
       }
+    },
+    "kh-maps": {
+      "root": "src/libs/kh-maps",
+      "sourceRoot": "src/libs/kh-maps/src",
+      "projectType": "library",
+      "prefix": "kh",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "src/libs/kh-maps/tsconfig.lib.json",
+            "project": "src/libs/kh-maps/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "src/libs/kh-maps/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/libs/kh-maps/src/test.ts",
+            "tsConfig": "src/libs/kh-maps/tsconfig.spec.json",
+            "karmaConfig": "src/libs/kh-maps/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/libs/kh-maps/tsconfig.lib.json",
+              "src/libs/kh-maps/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

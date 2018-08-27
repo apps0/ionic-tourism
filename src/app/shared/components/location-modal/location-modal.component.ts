@@ -14,4 +14,7 @@ export class LocationModalComponent implements OnInit {
   onClose() {
     this.modalController.dismiss();
   }
+  onMapInit(e){
+    console.log(e);
+  }
 }

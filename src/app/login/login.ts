@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'login',
   templateUrl: 'login.html',
-  styleUrls: ['login.css']
+  styleUrls: ['login.scss']
 })
 export class LoginPage {
   userName:string;

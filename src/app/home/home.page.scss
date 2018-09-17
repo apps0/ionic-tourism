@@ -1,12 +1,22 @@
-
-:host{
-.home-container{
-    height:100%;
-    width:100%;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
+:host {
+  .home-container {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    // flex-direction: column;
+    // justify-content: center;
     // align-items: center;
-    background-color:var(--ion-color-secondary)
-}
+    background-color: #fff;
+
+    .logo-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url("/assets/images/logo.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+  }
 }

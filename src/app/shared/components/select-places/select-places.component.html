@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar color='secondary'>
+    <ion-buttons slot="start">
+      <ion-button fill="solid" (click)='onCancel()' color='light' fill="outline">
+        Back
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Select Travel Place</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-places (onSelect)='onPlaceSelect($event)'></app-places>
+</ion-content>

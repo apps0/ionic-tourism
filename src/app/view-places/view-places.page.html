@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color='secondary'>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>Available Locations</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color='secondary'>
+    <ion-searchbar animated="true"  (ionChange)='onSearch($event)' spellcheck='true'></ion-searchbar>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-places></app-places>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink='/register-place'>
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

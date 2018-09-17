@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register Place</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <form [formGroup]='registerForm' novalidate>
+      <div class="image-container">
+        <!-- <img  class="place-image" src="/assets/empty.png" alt=""> -->
+        <div *ngIf='!registerForm.get("imageUrl").value' class="image-placeholder"></div>
+        <img [src]="registerForm.get('imageUrl').value" alt="">
+        <!-- fab placed to the bottom end -->
+        <input type="hidden" formControlName='imagePath'>
+        <ion-fab vertical="bottom" horizontal="end" edge>
+          <ion-fab-button appImage (onSuccess)='onImageSelect($event)' (onError)='onImageError($event)'>
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </div>
+      <ion-item-divider>
+        <ion-label>
+          <ion-text color="primary">
+            <h2>NAME</h2>
+          </ion-text>
+        </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-input formControlName='name' type="text" placeholder="Covalam beach"></ion-input>
+      </ion-item>
+      <ion-item-divider>
+        <ion-label>
+          <ion-text color="primary">
+            <h2>DESCRIPTION</h2>
+          </ion-text>
+        </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-textarea formControlName='description' type="text" placeholder="Ulloor , Trivandrum"></ion-textarea>
+      </ion-item>
+      <ion-item-divider>
+        <ion-label>
+          <ion-text color="primary">
+            <h2> ADDRESS FROM MAP</h2>
+          </ion-text>
+          <p>Latitude and longitude .</p>
+        </ion-label>
+        <ion-fab-button appLocation enableSelection='true' color='secondary' (onSelect)='onLocationSelect($event)'>
+          <ion-icon name="compass"></ion-icon>
+        </ion-fab-button>
+      </ion-item-divider>
+      <ion-item>
+        <ion-input [value]='registerForm.get("latLng").value' type="text" placeholder="23.455,45.555" disabled></ion-input>
+        <input type="hidden" formControlName="latLng">
+      </ion-item>
+      <ion-item-divider>
+        <ion-label>
+          <ion-text color="primary">
+            <h2>ADDRESS</h2>
+          </ion-text>
+        </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-textarea formControlName='address' type="text" placeholder="Ulloor , Trivandrum"></ion-textarea>
+      </ion-item>
+    </form>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" (click)='onSave()'>Submit</ion-button>
+</ion-footer>

@@ -1,0 +1,21 @@
+Food and accomodation
+Image
+
+
+Type : With liscence / Without Liscence
+Upload Liscence
+
+type:hut/lodge/hotel 3start/hotel 5start /paying guest/resort ==>radio button
+
+Description
+
+Is Food Included :yes/no
+
+type:breakfast/lunch/dinner
+description
+ 
+
+
+
+
+

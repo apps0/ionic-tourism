@@ -1,0 +1,11 @@
+:host{
+    .place-image-container{
+        position:relative;
+        img{
+            max-height:200px;
+            &.place-image{
+                width:100%;
+            }
+        }
+    }
+}

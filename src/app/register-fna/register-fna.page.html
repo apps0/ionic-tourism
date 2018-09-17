@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Food And Accomodation</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-card *ngIf='fnaType'>
+      <ion-item>
+        <ion-label>
+          <h1>{{fnaType.Type}}</h1>
+        </ion-label>
+      </ion-item>
+      <ion-card-content>
+        <p>Description : {{fnaType.Description}}</p>
+      </ion-card-content>
+    </ion-card>
+    <form [formGroup]='registerForm' novalidate>
+      <!--License-->
+      <ng-container *ngIf='fnaType?.IsLicenseNeeded;else noLicenseTemplate;'>
+        <ion-item-divider>
+          <ion-label>
+            <ion-text color="primary">
+              <h2>LICENSE ID</h2>
+            </ion-text>
+          </ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-input formControlName='licenseId' type="text" placeholder="LCID12344"></ion-input>
+        </ion-item>
+        <ion-item-divider>
+          <ion-label>
+            <ion-text color="primary">
+              <h2> UPLOAD DOCUMENT FOR LICENSE</h2>
+            </ion-text>
+            <p>Image should be less than 200kb in size .</p>
+          </ion-label>
+          <input type="hidden" formControlName='licenseImagePath'>
+          <input type="hidden" formControlName='licenseImageUrl'>
+          <ion-fab-button appImage (onSuccess)='onImageSelect($event)' (onError)='onImageError($event)'>
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </ion-item-divider>
+        <ion-item>
+            {{registerForm.get("licenseImagePath").value?"uploaded":"pending"}}
+        </ion-item>
+      </ng-container>
+      <ng-template #noLicenseTemplate>
+        <h3>Will be verified Manually .</h3>
+      </ng-template>
+      <!--Name-->
+      <ion-item-divider>
+        <ion-label>
+          <ion-text color="primary">
+            <h2>FULL NAME</h2>
+          </ion-text>
+        </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-input formControlName='fullName' type="text" placeholder="John Stone"></ion-input>
+      </ion-item>
+      <ion-item-divider>
+        <ion-label>
+          <ion-text color="primary">
+            <h2>EMAIL ID</h2>
+          </ion-text>
+        </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-input formControlName='emailId' type="text" placeholder="john@gmail.com"></ion-input>
+      </ion-item>
+      <ion-item-divider>
+        <ion-label>
+          <ion-text color="primary">
+            <h2>PHONE NUMBER</h2>
+          </ion-text>
+        </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-input formControlName='phoneNumber' type="text" placeholder="Enter your phone number here"></ion-input>
+      </ion-item>
+
+      <ion-item-divider>
+        <ion-label>
+          <ion-text color="primary">
+            <h2> ADDRESS FROM MAP</h2>
+          </ion-text>
+          <p>Latitude and longitude .</p>
+        </ion-label>
+        <ion-fab-button appLocation enableSelection='true' color='secondary' (onSelect)='onLocationSelect($event)'>
+            <ion-icon name="compass"></ion-icon>
+          </ion-fab-button>
+      </ion-item-divider>
+      <ion-item>
+        <ion-input type="text" [value]='registerForm.get("latLng").value' placeholder="23.455,45.555" disabled></ion-input>
+        <input type="hidden" formControlName='latLng'>
+      </ion-item>
+      <ion-item-divider>
+        <ion-label>
+          <ion-text color="primary">
+            <h2>ADDRESS</h2>
+          </ion-text>
+        </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-textarea formControlName='address' type="text" placeholder="Ulloor , Trivandrum"></ion-textarea>
+      </ion-item>
+      <ion-item-divider>
+        <ion-label>
+          <ion-text color="primary">
+            <h2>FNA DESCRIPTION</h2>
+          </ion-text>
+        </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-textarea formControlName='fnaDescription' type="text" placeholder="Food & Accomodation Details  "></ion-textarea>
+      </ion-item>
+      <ion-item-divider>
+        <ion-label>
+          <ion-text color="primary">
+            <h2>PASSWORD</h2>
+          </ion-text>
+        </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-input formControlName='password' type="password" placeholder="password"></ion-input>
+      </ion-item>
+
+    </form>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" (click)='onRegister()'>Save</ion-button>
+</ion-footer>

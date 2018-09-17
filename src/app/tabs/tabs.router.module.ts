@@ -1,36 +1,48 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
-import { TabsPage } from './tabs.page';
-import { HomePage } from '../home/home.page';
-import { AboutPage } from '../about/about.page';
-import { ContactPage } from '../contact/contact.page';
+import { TabsPage } from "./tabs.page";
+
+import { BookTripPage } from "../book-trip/book-trip.page";
+import { ViewPlacesPage } from "../view-places/view-places.page";
+import { TripHistoryPage } from "../trip-history/trip-history.page";
+import { SettingsPage } from "../settings/settings.page";
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: "tabs",
     component: TabsPage,
     children: [
       {
-        path: 'home',
-        outlet: 'home',
-        component: HomePage
+        path: "book",
+        outlet: "book",
+        component: BookTripPage
       },
       {
-        path: 'about',
-        outlet: 'about',
-        component: AboutPage
+        path: "places",
+        outlet: "places",
+        component: ViewPlacesPage
       },
       {
-        path: 'contact',
-        outlet: 'contact',
-        component: ContactPage
+        path: "trip-history",
+        outlet: "trip-history",
+        component: TripHistoryPage
+      },
+      {
+        path: "settings",
+        outlet: "settings",
+        component: SettingsPage
+      },
+      {
+        path: "",
+        redirectTo: "/user/tabs/(book:book)",
+        pathMatch: "full"
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/(home:home)',
+    redirectTo: '/user/tabs/(book:book)',
     pathMatch: 'full'
   }
 ];

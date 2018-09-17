@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color='secondary'>
+    <ion-buttons slot="start">
+      <ion-button fill="solid" (click)='onCancel()' color='light' fill="outline">
+        Back
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Select Food & Accomodation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf='(data$|async) as res'>
+    <ng-container *ngIf='res.data;else notificationTemplate;'>
+      <ion-card *ngFor="let fna of res.data">
+        <div>
+          <h3>Name : {{fna.FullName}}</h3>
+          <p>Type : {{fna.FnaType.Type}}</p>
+          <p>PhoneNumber : {{fna.PhoneNumber}}</p>
+          <p>Facilities : {{fna.FnaDescription}}</p>
+        </div>
+        <ion-fab vertical="bottom" horizontal="end">
+          <ion-fab-button (click)='onSelect(fna)'>
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-card>
+    </ng-container>
+    <ng-template #notificationTemplate>
+      <ng-container *ngIf='res.error;else loadingTemplate;'>
+        <div class="item-center">
+          Something went wrong , Try again later .
+        </div>
+      </ng-container>
+      <ng-template #loadingTemplate>
+        <div class="item-center">
+          <ion-spinner name="lines"></ion-spinner>
+        </div>
+      </ng-template>
+    </ng-template>
+  </ng-container>
+
+</ion-content>

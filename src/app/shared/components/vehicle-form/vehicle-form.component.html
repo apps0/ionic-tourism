@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+        <ion-buttons slot="start">
+            <ion-button fill="solid" (click)='onClose()' color='light' fill="outline">
+                Back
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Register Vehicle</ion-title>
+        <ion-buttons slot="end">
+            <ion-button fill="solid" (click)='onRegister()' color='light' fill="outline">
+                Confirm
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <form [formGroup]='registerForm' novalidate>
+            <div class="image-container">
+                <div *ngIf='!registerForm.get("imageUrl").value' class="image-placeholder"></div>
+                <img [src]="registerForm.get('imageUrl').value" alt="">
+                <input type="hidden" formControlName='imagePath'>
+                <ion-fab vertical="bottom" horizontal="end" edge>
+                    <ion-fab-button appImage (onSuccess)='onImageSelect($event)' (onError)='onImageError($event)'>
+                        <ion-icon name="camera"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+            </div>
+            <ion-item-divider>
+                <ion-label>
+                    <ion-text color="primary">
+                        <h2>VEHICLE NAME</h2>
+                    </ion-text>
+                </ion-label>
+            </ion-item-divider>
+            <ion-item>
+                <ion-input formControlName='vehicleName' type="text" placeholder="Maruthi 800"></ion-input>
+            </ion-item>
+            <ion-item-divider>
+                <ion-label>
+                    <ion-text color="primary">
+                        <h2>SEATING CAPACITY</h2>
+                    </ion-text>
+                </ion-label>
+            </ion-item-divider>
+            <ion-item>
+                <ion-input formControlName='seatingCapacity' type="number" placeholder="3"></ion-input>
+            </ion-item>
+            <ion-item-divider>
+                <ion-label>
+                    <ion-text color="primary">
+                        <h2>CHARGE PER HOUR (in INR)</h2>
+                    </ion-text>
+                </ion-label>
+            </ion-item-divider>
+            <ion-item>
+                <ion-input formControlName='charge' type="number" placeholder="600"></ion-input>
+            </ion-item>
+            <ion-item-divider>
+                <ion-label>
+                    <ion-text color="primary">
+                        <h2>FACILITIES</h2>
+                    </ion-text>
+                </ion-label>
+            </ion-item-divider>
+            <ion-item>
+                <ion-textarea formControlName='facilities' type="text" placeholder="vehicle facilities"></ion-textarea>
+            </ion-item>
+        </form>
+    </ion-list>
+</ion-content>

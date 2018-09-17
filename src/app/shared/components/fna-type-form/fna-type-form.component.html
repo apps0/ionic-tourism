@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+        <ion-buttons slot="start">
+            <ion-button fill="solid" (click)='onClose()' color='light' fill="outline">
+                Back
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Register FNA Types</ion-title>
+        <ion-buttons slot="end">
+            <ion-button fill="solid" (click)='onRegister()' color='light' fill="outline">
+                Confirm
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <form [formGroup]='registerForm' novalidate>
+            <ion-item-divider>
+                <ion-label>
+                    <ion-text color="primary">
+                        <h2>TYPE</h2>
+                    </ion-text>
+                </ion-label>
+            </ion-item-divider>
+            <ion-item>
+                <ion-input formControlName='type' type="text" placeholder="Hut"></ion-input>
+            </ion-item>
+            <ion-item-divider>
+                <ion-label>
+                    <ion-text color="primary">
+                        <h2>IS LICENSE NEEDED</h2>
+                    </ion-text>
+                </ion-label>
+            </ion-item-divider>
+            <ion-item>
+                <ion-checkbox formControlName='isLicenseNeeded' color="primary"></ion-checkbox>
+            </ion-item>
+            <ion-item-divider>
+                <ion-label>
+                    <ion-text color="primary">
+                        <h2>TYPE DESCRIPTION</h2>
+                    </ion-text>
+                </ion-label>
+            </ion-item-divider>
+            <ion-item>
+                <ion-textarea formControlName='description' type="text" placeholder="Description"></ion-textarea>
+            </ion-item>
+        </form>
+    </ion-list>
+</ion-content>

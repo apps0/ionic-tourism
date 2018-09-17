@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar color='secondary'>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Fna Types</ion-title>
+      <ion-buttons slot="primary">
+        <ion-button color="light" fill="outline" (click)='register()' *ngIf='authService.isAdmin$|async'>
+          Add
+          <ion-icon slot="end" name="add"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <app-fna-types (onSelect)='onSelect($event)'></app-fna-types>
+  </ion-content>

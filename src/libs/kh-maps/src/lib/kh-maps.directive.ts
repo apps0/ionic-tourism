@@ -17,13 +17,16 @@ export class MapStatus {
   message?: string;
 }
 @Directive({
-  selector: "[kHMaps]"
+  selector: "[khMaps]"
 })
 export class KhMapsDirective {
   map;
-
+  @Input("view")
+  viewMarker: any = null;
   @Output("mapInit")
   onInit: EventEmitter<MapStatus> = new EventEmitter<MapStatus>();
+  @Output("onMarkerAdd")
+  markerEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   public markers: any[] = [];
   private mapsLoaded: boolean = false;
@@ -33,11 +36,11 @@ export class KhMapsDirective {
     private renderer: Renderer2,
     private element: ElementRef,
     @Inject(DOCUMENT) private _document,
-    @Inject(KH_MAP_KEY) private apiKey,
+    @Inject(KH_MAP_KEY) private apiKey
   ) {}
 
   async ngOnInit() {
-    this.renderer.setStyle(this.element.nativeElement,"height","100%");
+    this.renderer.setStyle(this.element.nativeElement, "height", "100%");
     this.init().then(
       res => {
         console.log("Google Maps ready.");
@@ -156,34 +159,51 @@ export class KhMapsDirective {
 
   private initMap(): Promise<any> {
     return new Promise((resolve, reject) => {
-      Geolocation.getCurrentPosition().then(
-        position => {
-          console.log(position);
+      //view only
+      if (this.viewMarker) {
+        let position = this.viewMarker;
+        let latLng = new google.maps.LatLng(position.lat, position.lng);
 
-          let latLng = new google.maps.LatLng(
-            position.coords.latitude,
-            position.coords.longitude
-          );
+        let mapOptions = {
+          center: latLng,
+          zoom: 15
+        };
 
-          let mapOptions = {
-            center: latLng,
-            zoom: 15
-          };
+        this.map = new google.maps.Map(this.element.nativeElement, mapOptions);
 
-          this.map = new google.maps.Map(
-            this.element.nativeElement,
-            mapOptions
-          );
+        //add marker
+        this.addMarker(position.lat, position.lng);
+        resolve(true);
+      } else {
+        Geolocation.getCurrentPosition().then(
+          position => {
+            console.log(position);
 
-          //add marker
-          this.addMarker(position.coords.latitude, position.coords.longitude);
+            let latLng = new google.maps.LatLng(
+              position.coords.latitude,
+              position.coords.longitude
+            );
 
-          resolve(true);
-        },
-        err => {
-          reject("Could not initialise map");
-        }
-      );
+            let mapOptions = {
+              center: latLng,
+              zoom: 15
+            };
+
+            this.map = new google.maps.Map(
+              this.element.nativeElement,
+              mapOptions
+            );
+
+            //add marker
+            this.addMarker(position.coords.latitude, position.coords.longitude);
+
+            resolve(true);
+          },
+          err => {
+            reject("Could not initialise map");
+          }
+        );
+      }
     });
   }
 
@@ -195,7 +215,7 @@ export class KhMapsDirective {
       animation: google.maps.Animation.DROP,
       position: latLng
     });
-
+    this.markerEmitter.emit({ lat: lat, lng: lng });
     this.markers.push(marker);
   }
 }

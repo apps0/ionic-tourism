@@ -4,55 +4,43 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <div class="admin-grid">
-    <div class="db-item" [routerLink]="['/verify-user',vehicleProvider]">
-      <ion-icon name="checkbox"></ion-icon>
-      <div class="db-label">
+<ion-content padding class="bg-primary">
+  <div class="col-grid">
+    <ion-card class="col-item" [routerLink]="['/admin/verify-user',vehicleProvider]">
+      <ion-icon name="checkbox" color='primary'></ion-icon>
+      <div class="col-label">
         Verify Vehicle Provider
       </div>
-    </div>
-    <div class="db-item" [routerLink]="['/verify-places']">
-      <ion-icon name="checkbox"></ion-icon>
-      <div class="db-label">
+    </ion-card>
+    <ion-card class="col-item" [routerLink]="['/admin/verify-places']">
+      <ion-icon name="checkbox" color='primary'></ion-icon>
+      <div class="col-label">
         Verify Place
       </div>
-    </div>
-    <div class="db-item" [routerLink]="['/verify-user',companion]">
-      <ion-icon name="checkbox"></ion-icon>
-      <div class="db-label">
+    </ion-card>
+    <ion-card class="col-item" [routerLink]="['/admin/verify-user',companion]">
+      <ion-icon name="checkbox" color='primary'></ion-icon>
+      <div class="col-label">
         Verify Companion
       </div>
-    </div>
-    <div class="db-item" [routerLink]="['/verify-user',foodProvider]">
-      <ion-icon name="add"></ion-icon>
-      <div class="db-label">
+    </ion-card>
+    <ion-card class="col-item" [routerLink]="['/admin/verify-user',foodProvider]">
+      <ion-icon name="checkbox" color='primary'></ion-icon>
+      <div class="col-label">
         Verify Food And Accomodation
       </div>
-    </div>
-    <div class="db-item">
-      <ion-icon name="checkbox"></ion-icon>
-      <div class="db-label">
-        Messages
-      </div>
-    </div>
-    <div class="db-item">
-      <ion-icon name="checkbox"></ion-icon>
-      <div class="db-label">
-        Monitor Trip
-      </div>
-    </div>
-    <div class="db-item" routerLink='/register-fna-type'>
-      <ion-icon name="checkbox"></ion-icon>
-      <div class="db-label">
+    </ion-card>
+    <ion-card class="col-item" routerLink='/admin/register-fna-type'>
+      <ion-icon name="add" color='primary'></ion-icon>
+      <div class="col-label">
         FNA Types
       </div>
-    </div>
-    <div class="db-item" (click)='logOut()'>
-      <ion-icon name="log-out"></ion-icon>
-      <div class="db-label">
+    </ion-card>
+    <ion-card class="col-item" (click)='logOut()'>
+      <ion-icon name="log-out" color='danger'></ion-icon>
+      <div class="col-label">
         Log Out
       </div>
-    </div>
+    </ion-card>
   </div>
 </ion-content>

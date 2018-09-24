@@ -33,26 +33,24 @@ export class UserService {
   );
 
   isTourist$: Observable<boolean> = this.userSubject.asObservable().pipe(
-    map(x => (x ? x.Role == UserRole.Tourist : false)),
-    share()
+    map(x => {
+      return x ? x.Role == UserRole.Tourist : false;
+    })
   );
 
-  isCompanion$: Observable<boolean> = this.userSubject.asObservable().pipe(
-    map(x => (x ? x.Role == UserRole.Companion : false)),
-    share()
-  );
+  isCompanion$: Observable<boolean> = this.userSubject
+    .asObservable()
+    .pipe(map(x => (x ? x.Role == UserRole.Companion : false)));
 
   isVehicleProvider$: Observable<
     boolean
-  > = this.userSubject.asObservable().pipe(
-    map(x => (x ? x.Role == UserRole.VehicleProvider : false)),
-    share()
-  );
+  > = this.userSubject
+    .asObservable()
+    .pipe(map(x => (x ? x.Role == UserRole.VehicleProvider : false)));
 
-  isFnaProvider$: Observable<boolean> = this.userSubject.asObservable().pipe(
-    map(x => (x ? x.Role == UserRole.FoodProvider : false)),
-    share()
-  );
+  isFnaProvider$: Observable<boolean> = this.userSubject
+    .asObservable()
+    .pipe(map(x => (x ? x.Role == UserRole.FoodProvider : false)));
 
   userCollection: AngularFirestoreCollection<User>;
   userList: Observable<User[]>;
@@ -119,8 +117,24 @@ export class UserService {
     );
   }
   logOut() {
-    window.localStorage.removeItem("user");
-    this.userSubject.next(null);
-    return of(true);
+    return of(true)
+    .pipe(
+      tap(() => {
+        window.localStorage.removeItem("user");
+        this.userSubject.next(null);
+      })
+    );
+  }
+
+  getById(productId: string): any {
+    return this.firestoreService.docWithId$(
+      `${this.userCollectionName}/${productId}`
+    );
+  }
+  updateDoc(updatedUser,docId): any {
+    this.firestoreService.update(
+      `${this.userCollectionName}/${docId}`,
+      updatedUser
+    );
   }
 }

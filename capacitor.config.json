@@ -1,6 +1,10 @@
 {
-  "appId": "net.keephacking.iot_pollution",
-  "appName": "iot-pollution",
+  "appId": "net.keephacking.ionic_tourism",
+  "appName": "ionic-tourism",
   "bundledWebRuntime": false,
-  "webDir": "www"
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true
+  }
 }

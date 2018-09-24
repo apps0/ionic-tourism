@@ -30,7 +30,19 @@ export class PlaceService {
   get():any {
     return this.firestoreService.colWithIds$(this.placeCollectionName,
       (q)=>{
-        return q.limit(30).orderBy("createdAt",'desc')
+        return q.limit(30).orderBy("CreatedAt",'desc')
       });
+  }
+
+  getById(id: string): any {
+    return this.firestoreService.docWithId$(
+      `${this.placeCollectionName}/${id}`
+    );
+  }
+  updateDoc(updatedDoc,docId): any {
+    this.firestoreService.update(
+      `${this.placeCollectionName}/${docId}`,
+      updatedDoc
+    );
   }
 }

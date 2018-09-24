@@ -10,8 +10,8 @@
         <ion-button *ngIf='userService.isAdmin$|async' round expand='block' color="primary" routerLink='/admin'>Dashboard</ion-button>
       </ng-container>
       <ng-template #loginTemplate>
-        <ion-button round routerLink='/login' expand='block' color="primary">Login</ion-button>
-        <ion-button round routerLink='/signup-options' expand='block' color="primary">Sign Up</ion-button>
+        <ion-button round routerLink='/auth/login' expand='block' color="primary">Login</ion-button>
+        <ion-button round routerLink='/auth/signup-options' expand='block' color="primary">Sign Up</ion-button>
         <ion-button round routerLink='/view-places' expand='block' color="primary">Places</ion-button>
       </ng-template>
     </div>

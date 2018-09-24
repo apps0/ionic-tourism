@@ -18,10 +18,15 @@ export class FnaService {
   }
   getTypes(): Observable<any> {
     return this.firestoreService.colWithIds$(this.collectionName, q => {
-      return q.limit(30).orderBy("createdAt", "desc");
+      return q.limit(30).orderBy("CreatedAt", "desc");
     });
   }
   getType(typeId): Observable<any> {
-    return this.firestoreService.docWithId$(this.collectionName + "/" + typeId).pipe(take(1));
+    return this.firestoreService
+      .docWithId$(this.collectionName + "/" + typeId)
+      .pipe(take(1));
+  }
+  getById(id: string): any {
+    return this.firestoreService.docWithId$(`${this.collectionName}/${id}`);
   }
 }

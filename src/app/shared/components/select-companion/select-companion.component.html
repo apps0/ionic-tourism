@@ -13,38 +13,29 @@
   <ng-container *ngIf='(data$|async) as res'>
     <ng-container *ngIf='res.data;else notificationTemplate;'>
       <ion-card *ngFor="let user of res.data">
-        <div class="kh-col-2">
-          <div class="place-img">
-          </div>
-          <div padding-left>
-            <h3>Name : {{user.FullName}}</h3>
-            <h4>Gender : {{user.Gender}}</h4>
-          </div>
-        </div>
-        <div>
-          <ion-fab vertical="bottom" horizontal="end">
-            <ion-fab-button (click)='onSelect(user)'>
-              <ion-icon name="add"></ion-icon>
-            </ion-fab-button>
-          </ion-fab>
-        </div>
+        <card-companion [data]='user'></card-companion>
+        <ion-fab vertical="bottom" horizontal="end" slot='end'>
+          <ion-fab-button (click)='onSelect(user)'>
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
       </ion-card>
     </ng-container>
     <ng-template #notificationTemplate>
-        <ng-container *ngIf='res.error||res.empty;else loadingTemplate;'>
-          <div class="item-center" [hidden]='!res.error'>
-            Something went wrong , Try again later .
-          </div>
-          <div class="item-center" [hidden]='!res.empty'>
-            List is empty.
-          </div>
-        </ng-container>
-        <ng-template #loadingTemplate>
-          <div class="item-center">
-            <ion-spinner name="lines"></ion-spinner>
-          </div>
-        </ng-template>
+      <ng-container *ngIf='res.error||res.empty;else loadingTemplate;'>
+        <div class="item-center" [hidden]='!res.error'>
+          Something went wrong , Try again later .
+        </div>
+        <div class="item-center" [hidden]='!res.empty'>
+          List is empty.
+        </div>
+      </ng-container>
+      <ng-template #loadingTemplate>
+        <div class="item-center">
+          <ion-spinner name="lines"></ion-spinner>
+        </div>
       </ng-template>
+    </ng-template>
   </ng-container>
 
 

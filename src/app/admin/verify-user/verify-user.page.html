@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color='secondary'>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Verification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ng-container *ngIf='(data$|async) as res'>
+    <ng-container *ngIf='res.data;else notificationTemplate;'>
+
+      <ion-card *ngFor="let user of res.data">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="/assets/user.png">
+          </ion-avatar>
+            <ion-label text-wrap>
+              <ion-text color="primary">
+                <h1>{{user.FullName}}</h1>
+              </ion-text>
+              <p>Ph : {{user.PhoneNumber}}</p>
+              <p>Email : {{user.EmailId}}</p>
+
+              <ng-container *ngIf='"Companion"===UserRoles[user.Role]'>
+                <p>AdhaarID : {{user.AdhaarId}}</p>
+                <p>DOB : {{user.DOB|date}}</p>
+                <p>Gender : {{user.Gender}}</p>
+              </ng-container>
+              <ng-container *ngIf='"FoodProvider"===UserRoles[user.Role]'>
+                <p text-wrap>Description:{{user.FnaDescription}}</p>
+                <p text-wrap>Address:{{user.Address}}</p>
+                <p>Type:{{user.FnaType.Type}} </p>
+              </ng-container>
+
+
+              <ion-text color='secondary' *ngIf='user?.CreatedAt'>
+                Joined At {{user?.CreatedAt.toDate()|date}}
+              </ion-text>
+            </ion-label>
+          <ion-fab vertical="bottom" horizontal="end" slot='end' *ngIf='user?.LatLng'>
+            <ion-fab-button [appLocation]='user?.LatLng' color='secondary'>
+              <ion-icon name="compass"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-item>
+      </ion-card>
+
+
+    </ng-container>
+    <ng-template #notificationTemplate>
+      <ng-container *ngIf='res.error||res.empty;else loadingTemplate;'>
+        <div class="item-center" [hidden]='!res.error'>
+          Something went wrong , Try again later .
+        </div>
+        <div class="item-center" [hidden]='!res.empty'>
+          List is empty .
+        </div>
+      </ng-container>
+      <ng-template #loadingTemplate>
+        <div class="item-center">
+          <ion-spinner name="lines"></ion-spinner>
+        </div>
+      </ng-template>
+    </ng-template>
+  </ng-container>
+</ion-content>

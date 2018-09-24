@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { IonicModule } from "@ionic/angular";
 import { ComponentsModule } from "./components/components.module";
-import { FirebaseImageModule } from "./features/firebase-image/firebase-image.module";
+import { RatingsModule } from "./features/ratings/ratings.module";
+import { ReviewModule } from "../review/review.module";
 
-const MODS = [CommonModule, ComponentsModule, FirebaseImageModule];
+const MODS = [CommonModule, ComponentsModule,RatingsModule,ReviewModule];
 
 @NgModule({
   imports: [...MODS],

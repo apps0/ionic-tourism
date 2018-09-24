@@ -1,0 +1,19 @@
+<ion-item>
+  <ion-avatar slot="start">
+    <img src="/assets/user.png">
+  </ion-avatar>
+  <ion-label text-wrap>
+    <ion-text color="primary">
+      <h1>Name : {{user.FullName}}</h1>
+    </ion-text>
+    <h4>Gender : {{user.Gender}}</h4>
+    <p>Ph : {{user.PhoneNumber}}</p>
+    <p>Email : {{user.EmailId}}</p>
+    <p>AdhaarID : {{user.AdhaarId}}</p>
+    <p>DOB : {{user.DOB|date}}</p>
+    <ion-text color='secondary' *ngIf='user?.CreatedAt'>
+      Joined At {{user?.CreatedAt.toDate()|date}}
+    </ion-text>
+    <kh-ratings [rating]='getAvgRating(user)' [itemId]='user.Id' reviewModal [reviewItemId]='user.Id' reviewItemType='user'></kh-ratings>
+  </ion-label>
+</ion-item>

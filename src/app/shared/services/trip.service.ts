@@ -16,7 +16,7 @@ export class TripService {
 
   getAll() {
     return this.firestoreService.colWithIds$(this.collectionName, q => {
-      return q.limit(30).orderBy("createdAt", "desc");
+      return q.limit(30).orderBy("CreatedAt", "desc");
     });
   }
   getAllUserTrips(userId):Observable<any> {
@@ -25,7 +25,27 @@ export class TripService {
       .limit(30);
     });
   }
+  getAllVehicleTrips(userId):Observable<any> {
+    return this.firestoreService.colWithIds$(this.collectionName, q => {
+      return q.where("Vehicle.ProviderId","==",userId)
+      .limit(30);
+    });
+  }
+  getAllFnaTrips(userId):Observable<any> {
+    return this.firestoreService.colWithIds$(this.collectionName, q => {
+      return q.where("Fna.Id","==",userId)
+      .limit(30);
+    });
+  }
+  getAllCompanionTrips(userId):Observable<any> {
+    return this.firestoreService.colWithIds$(this.collectionName, q => {
+      return q.where("Companion.Id","==",userId)
+      .limit(30);
+    });
+  }
   get(id: string) {
     return this.firestoreService.docWithId$(this.collectionName + "/" + id);
   }
+
+  
 }

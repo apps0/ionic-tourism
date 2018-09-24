@@ -1,7 +1,7 @@
 import { UserRole } from "./user-role";
 
 export class User {
-  Id?: number;
+  Id?: string;
   FullName?: string;
   EmailId?: string;
   PhoneNumber?: string;
@@ -22,4 +22,6 @@ export class User {
 
   AdhaarIdDocImagePath?: string;
   AdhaarIdDocImageUrl?: string;
+
+  CreatedAt?;
 }

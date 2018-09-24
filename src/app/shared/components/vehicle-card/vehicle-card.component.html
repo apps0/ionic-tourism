@@ -1,0 +1,40 @@
+<ng-container *ngIf='mini;else largeTemplate;'>
+  <ion-item>
+    <ion-avatar slot="start">
+      <img [src]="vehicle.ImageUrl">
+    </ion-avatar>
+    <ion-label text-wrap>
+      <ion-text color="primary">
+        <h1 class="capitalize">{{vehicle.Name}}</h1>
+      </ion-text>
+      <p text-wrap>SeatingCapacity:{{vehicle.SeatingCapacity}}</p>
+      <ion-text color='secondary' *ngIf='user?.CreatedAt'>
+        Added At {{vehicle?.CreatedAt.toDate()|date}}
+      </ion-text>
+      <kh-ratings [rating]='getAvgRating(vehicle)' [itemId]='vehicle.Id' reviewModal [reviewItemId]='vehicle.Id' reviewItemType='vehicle'
+        [disableWrite]='!reviewWrite'></kh-ratings>
+    </ion-label>
+  </ion-item>
+</ng-container>
+<ng-template #largeTemplate>
+  <ion-card>
+    <div class="image-container">
+      <div *ngIf='!vehicle.ImageUrl' class="image-placeholder"></div>
+      <img *ngIf='vehicle.ImageUrl' [src]="vehicle.ImageUrl" alt="">
+    </div>
+    <ion-card-header class="place-header">
+      <ion-card-title class="capitalize">{{vehicle.Name}}</ion-card-title>
+      <ion-card-subtitle>Seating Capacity:{{vehicle.SeatingCapacity}}</ion-card-subtitle>
+      <ion-card-subtitle>Charge :Rs {{vehicle.Charge}} (per hour rate)</ion-card-subtitle>
+      <p text-wrap>Other Features:{{vehicle.Facilities}}</p>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-text color='secondary' *ngIf='vehicle?.CreatedAt' slot='end'>
+          Added At {{vehicle?.CreatedAt.toDate()|date}}
+        </ion-text>
+        <kh-ratings [rating]='getAvgRating(vehicle)' [itemId]='vehicle.Id' reviewModal [reviewItemId]='vehicle.Id' reviewItemType='vehicle'></kh-ratings>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ng-template>

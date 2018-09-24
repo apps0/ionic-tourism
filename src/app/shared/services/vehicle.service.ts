@@ -31,8 +31,20 @@ export class VehicleService {
     return this.firestoreService
       .colWithIds$<any>(this.collectionName, (ref) => {
         return ref
-        .orderBy("createdAt",'desc')
+        .orderBy("CreatedAt",'desc')
         .limit(30);
       });
+  }
+
+  getById(docId: string): any {
+    return this.firestoreService.docWithId$(
+      `${this.collectionName}/${docId}`
+    );
+  }
+  updateDoc(updatedDoc,docId): any {
+    this.firestoreService.update(
+      `${this.collectionName}/${docId}`,
+      updatedDoc
+    );
   }
 }

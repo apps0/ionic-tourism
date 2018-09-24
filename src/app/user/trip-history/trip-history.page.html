@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Trip History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ng-container *ngIf='(data$|async) as res'>
+    <ng-container *ngIf='res.data;else notificationTemplate;'>
+      <ion-card *ngFor="let trip of res.data" [routerLink]="['/user/view-trip/',trip.Id]">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="trip.Place.ImageUrl">
+          </ion-avatar>
+          <ion-label>
+            <ion-text color="primary">
+              <h1>Trip to {{trip.Place.Name}}</h1>
+            </ion-text>
+            <p>From {{trip.StartDate|date}} to {{trip.EndDate|date}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-label>Companion : {{trip.Companion.FullName}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Food & Accomodation : {{trip.Fna.FullName}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Vehicle : {{trip.Vehicle.Name}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+    <ng-template #notificationTemplate>
+      <ng-container *ngIf='res.error||res.empty;else loadingTemplate;'>
+        <div class="item-center" [hidden]='!res.error'>
+          Something went wrong , Try again later .
+        </div>
+        <div class="item-center" [hidden]='!res.empty'>
+          No trips to display .
+        </div>
+      </ng-container>
+      <ng-template #loadingTemplate>
+        <div class="item-center">
+          <ion-spinner name="lines"></ion-spinner>
+        </div>
+      </ng-template>
+    </ng-template>
+  </ng-container>
+</ion-content>

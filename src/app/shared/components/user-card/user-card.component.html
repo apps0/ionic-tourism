@@ -1,0 +1,28 @@
+<ion-item>
+  <ion-avatar slot="start">
+    <img [src]="userImage">
+  </ion-avatar>
+  <ion-label text-wrap>
+    <ion-text color="primary">
+      <h1 class="capitalize">{{user.FullName}}</h1>
+    </ion-text>
+    <p>Ph : {{user.PhoneNumber}}</p>
+    <p>Email : {{user.EmailId}}</p>
+
+    <ng-container *ngIf='userRoles["FoodProvider"]===user.Role'>
+      <p text-wrap>Description:{{user.FnaDescription}}</p>
+      <p text-wrap>Address:{{user.Address}}</p>
+      <p>Type:{{user.FnaType.Type}} </p>
+    </ng-container>
+    <ng-container *ngIf='userRoles["Companion"]===user.Role'>
+      <h4>Gender : {{user.Gender}}</h4>
+      <p>AdhaarID : {{user.AdhaarId}}</p>
+      <p>DOB : {{user.DOB|date}}</p>
+    </ng-container>
+    
+    <ion-text color='secondary' *ngIf='user?.CreatedAt'>
+      Joined At {{user?.CreatedAt.toDate()|date}}
+    </ion-text>
+    <kh-ratings [rating]='getAvgRating(user)' [itemId]='user.Id' reviewModal [reviewItemId]='user.Id' reviewItemType='user' [disableWrite]='!reviewWrite'></kh-ratings>
+  </ion-label>
+</ion-item>

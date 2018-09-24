@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color='secondary'>
+    <ion-title>User Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="bg-secondary">
+  <div class="col-grid">
+    <!--trips-->
+    <div class="col-item" [routerLink]="['/user/trip-history']" *ngIf='authService.isTourist$|async'>
+      <ion-icon name="infinite" color='secondary'></ion-icon>
+      <div class="col-label">
+        Trips
+      </div>
+    </div>
+    <div class="col-item" [routerLink]="['/user/companion-trips']" *ngIf='authService.isCompanion$|async'>
+      <ion-icon name="infinite" color='secondary'></ion-icon>
+      <div class="col-label">
+        Trips
+      </div>
+    </div>
+    <div class="col-item" [routerLink]="['/user/vehicle-trips']" *ngIf='authService.isVehicleProvider$|async'>
+      <ion-icon name="infinite" color='secondary'></ion-icon>
+      <div class="col-label">
+        Trips
+      </div>
+    </div>
+    <div class="col-item" [routerLink]="['/user/fna-trips']" *ngIf='authService.isFnaProvider$|async'>
+      <ion-icon name="infinite" color='secondary'></ion-icon>
+      <div class="col-label">
+        Trips
+      </div>
+    </div>
+    <div class="col-item" [routerLink]="['/user/book-trip']" *ngIf='authService.isTourist$|async'>
+      <ion-icon name="infinite" color='secondary'></ion-icon>
+      <div class="col-label">
+        Book Trips
+      </div>
+    </div>
+
+    <div class="col-item" routerLink='/view-places'>
+      <ion-icon name="infinite" color='secondary'></ion-icon>
+      <div class="col-label">
+        Tourist Places
+      </div>
+    </div>
+
+    <div class="col-item" *ngIf='authService.isVehicleProvider$|async' [routerLink]="['/user/register-vehicles',(authService.currentUser$|async)?.Id]">
+      <ion-icon name="infinite" color='secondary'></ion-icon>
+      <div class="col-label">
+        Your Vehicles
+      </div>
+    </div>
+    <!---->
+    <div class="col-item" (click)="logOut()">
+      <ion-icon name="log-out" color='danger'></ion-icon>
+      <div class="col-label">
+        Log Out
+      </div>
+    </div>
+  </div>
+</ion-content>

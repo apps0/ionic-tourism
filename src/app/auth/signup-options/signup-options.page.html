@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Sign up As</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="bg-primary">
+  <div class="col-grid">
+    <ion-card class="col-item" routerLink='/auth/register-user' padding>
+      <img src="/assets/tourist-male.png" alt="">
+      <div class="col-label">Tourist</div>
+    </ion-card>
+    <ion-card class="col-item" routerLink='/auth/register-companion' padding>
+      <img src="/assets/companion-male.jpg" alt="">
+      <div class="col-label">Companion</div>
+    </ion-card>
+    <ion-card class="col-item" routerLink='/auth/register-vehicle-provider' padding>
+      <img src="/assets/vehicle-provider.png" alt="">
+      <div class="col-label">Vehicle Provider</div>
+    </ion-card>
+    <ion-card class="col-item" routerLink='/admin/register-fna-type' padding>
+      <img src="/assets/fna.jpg" alt="">
+      <div class="col-label">Food And Accomodation</div>
+    </ion-card>
+  </div>
+</ion-content>

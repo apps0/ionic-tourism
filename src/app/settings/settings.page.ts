@@ -8,12 +8,16 @@ import { Router } from "@angular/router";
   styleUrls: ["./settings.page.scss"]
 })
 export class SettingsPage implements OnInit {
-  constructor(private userService: UserService, private router: Router) {}
+  user;
+  constructor(public userService: UserService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.user=this.userService.userSubject.value;
+  }
 
   logOut() {
-    this.userService.logOut().subscribe(() => {
+    this.userService.logOut()
+    .subscribe(() => {
       this.router.navigate(["/home"]);
     });
   }

@@ -1,15 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { LoadingController, ToastController } from "@ionic/angular";
-import { UserService } from "../shared/services/user.service";
-import { User, UserRole } from "../shared/models";
-import { Place } from "../shared/models/place";
-import { PlaceService } from "../shared/services/place.service";
 import { finalize } from "rxjs/operators";
 import {
   AngularFireUploadTask,
   AngularFireStorage
 } from "angularfire2/storage";
+import { PlaceService } from "../shared/services/place.service";
+import { Place } from "../shared/models/place";
 
 @Component({
   selector: "app-register-place",
@@ -92,8 +90,8 @@ export class RegisterPlacePage implements OnInit {
       Description: formModel.description as string,
       LatLng: formModel.latLng as string,
       Address: formModel.address as string,
-      ImagePath:formModel.imagePath as string,
-      ImageUrl:formModel.imageUrl as string,
+      ImagePath: formModel.imagePath as string,
+      ImageUrl: formModel.imageUrl as string
     };
 
     return data;

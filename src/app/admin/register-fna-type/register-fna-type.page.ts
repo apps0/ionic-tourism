@@ -30,7 +30,7 @@ export class RegisterFnaTypePage implements OnInit {
   }
 
   onSelect(data) {
-    this.router.navigate(["/register-fna/" + data.Id]);
+    this.router.navigate(["/auth/register-fna/" + data.Id]);
   }
   
 }

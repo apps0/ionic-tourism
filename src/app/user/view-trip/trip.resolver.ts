@@ -21,7 +21,7 @@ export class TripResolver implements Resolve<any> {
   ): Observable<any> {
     return this.tripService.get(route.paramMap.get("id")).pipe(
       tap(x => {
-        if (!x) this.router.navigate(["/login"]);
+        if (!x) this.router.navigate(["/auth/login"]);
       }),
       take(1)
     );

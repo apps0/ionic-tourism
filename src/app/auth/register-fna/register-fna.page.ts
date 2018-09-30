@@ -91,7 +91,7 @@ export class RegisterFnaPage implements OnInit {
         .then(res => {
           this.presentLoading(false);
           this.presentToast("Registration Successfull.");
-          this.router.navigate(["/login"]);
+          this.router.navigate(["/auth/login"]);
           console.log(res);
         })
         .catch(err => {

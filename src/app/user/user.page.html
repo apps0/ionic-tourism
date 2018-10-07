@@ -7,7 +7,7 @@
 <ion-content padding class="bg-secondary">
   <div class="col-grid">
     <!--trips-->
-    <div class="col-item" [routerLink]="['/user/trip-history']" *ngIf='authService.isTourist$|async'>
+    <div class="col-item" [routerLink]="['/trip-history']" *ngIf='authService.isTourist$|async'>
       <ion-icon name="infinite" color='secondary'></ion-icon>
       <div class="col-label">
         Trips
@@ -49,6 +49,13 @@
       <ion-icon name="infinite" color='secondary'></ion-icon>
       <div class="col-label">
         Your Vehicles
+      </div>
+    </div>
+
+    <div class="col-item" [routerLink]="['/chat-lists']">
+      <ion-icon name="chatbubbles" color='secondary'></ion-icon>
+      <div class="col-label">
+        Chats
       </div>
     </div>
     <!---->

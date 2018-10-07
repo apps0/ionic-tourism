@@ -14,9 +14,9 @@
     <ng-container *ngIf='res.data;else notificationTemplate;'>
       <div class='row-item' *ngFor="let vehicle of res.data">
         <vehicle-card [data]='vehicle'></vehicle-card>
-        <ion-fab vertical="bottom" horizontal="end" slot='fixed'>
-          <ion-fab-button (click)='onSelect(vehicle)'>
-            <ion-icon name="add"></ion-icon>
+        <ion-fab vertical="top" horizontal="end" slot='fixed'>
+          <ion-fab-button (click)='onSelect(vehicle)' color='secondary'>
+            <ion-icon name="checkmark-circle"></ion-icon>
           </ion-fab-button>
         </ion-fab>
       </div>

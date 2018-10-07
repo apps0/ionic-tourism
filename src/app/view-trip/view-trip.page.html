@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar color='secondary'>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Trip Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ng-container *ngIf='(data$|async) as res'>
+    <ng-container *ngIf='res.data;else notificationTemplate;'>
+      <ion-card>
+        <ion-card-content>
+          <ion-item>
+            <div class="position-relative">
+              <ion-fab vertical="top" horizontal="end">
+                <ion-fab-button [chatModal]='res.data.User.Id' color='warning' >
+                  <ion-icon name="chatbubbles"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
+              <user-card [data]='res.data.User' fetch noReview></user-card>
+            </div>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-text color='secondary' *ngIf='res.data?.CreatedAt'>
+                <!-- Added At {{res.data?.CreatedAt.toDate()|date}} -->
+              </ion-text>
+              <p>Boarding Address :{{res.data?.FromAddress}}</p>
+              <p>TotalMembers :{{res.data?.TotalMembers}}</p>
+              <p>From {{res.data.StartDate|date}} to {{res.data.EndDate|date}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <place-card [data]='res.data.Place' reviewWrite fetch></place-card>
+      <div class="position-relative">
+        <ion-fab vertical="top" horizontal="end">
+          <ion-fab-button [chatModal]='res.data.Companion.Id' color='warning'>
+            <ion-icon name="chatbubbles"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+        <user-card [data]='res.data.Companion' reviewWrite fetch></user-card>
+      </div>
+      <div class="position-relative">
+        <ion-fab vertical="top" horizontal="end">
+          <ion-fab-button [chatModal]='res.data.Fna.Id' color='warning'>
+            <ion-icon name="chatbubbles"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+        <user-card [data]='res.data.Fna' reviewWrite fetch></user-card>
+      </div>
+      <div class="position-relative">
+        <ion-fab vertical="top" horizontal="end">
+          <ion-fab-button [chatModal]='res.data.Vehicle.ProviderId' color='warning'>
+            <ion-icon name="chatbubbles"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+        <vehicle-card [data]='res.data.Vehicle' mini="true" reviewWrite fetch></vehicle-card>
+      </div>
+      <!-- 
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button [appLocation]='res.data.Place?.LatLng' color='secondary'>
+          <ion-icon name="compass"></ion-icon>
+        </ion-fab-button>
+      </ion-fab> -->
+    </ng-container>
+    <ng-template #notificationTemplate>
+      <ng-container *ngIf='res.error||res.empty;else loadingTemplate;'>
+        <div class="item-center" [hidden]='!res.error'>
+          Something went wrong , Try again later .
+        </div>
+        <div class="item-center" [hidden]='!res.empty'>
+          Nothing to display .
+        </div>
+      </ng-container>
+      <ng-template #loadingTemplate>
+        <div class="item-center">
+          <ion-spinner name="lines"></ion-spinner>
+        </div>
+      </ng-template>
+    </ng-template>
+  </ng-container>
+
+</ion-content>

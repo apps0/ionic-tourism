@@ -6,23 +6,11 @@ import { Routes, RouterModule } from "@angular/router";
 import { IonicModule } from "@ionic/angular";
 
 import { UserPage } from "./user.page";
-import { TripResolver } from "./view-trip/trip.resolver";
 
 const routes: Routes = [
   {
     path: "",
     component: UserPage
-  },
-  {
-    path: "trip-history",
-    loadChildren: "./trip-history/trip-history.module#TripHistoryPageModule"
-  },
-  {
-    path: "view-trip/:id",
-    loadChildren: "./view-trip/view-trip.module#ViewTripPageModule",
-    resolve: {
-      trip: TripResolver
-    }
   },
   {
     path: "vehicle-trips",

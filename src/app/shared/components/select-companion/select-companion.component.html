@@ -13,10 +13,11 @@
   <ng-container *ngIf='(data$|async) as res'>
     <ng-container *ngIf='res.data;else notificationTemplate;'>
       <ion-card *ngFor="let user of res.data">
-        <card-companion [data]='user'></card-companion>
+        <!-- <card-companion [data]='user'></card-companion> -->
+        <user-card [data]='user'></user-card>
         <ion-fab vertical="bottom" horizontal="end" slot='end'>
-          <ion-fab-button (click)='onSelect(user)'>
-            <ion-icon name="add"></ion-icon>
+          <ion-fab-button (click)='onSelect(user)' color='secondary'>
+            <ion-icon name="checkmark-circle"></ion-icon>
           </ion-fab-button>
         </ion-fab>
       </ion-card>

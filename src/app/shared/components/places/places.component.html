@@ -2,9 +2,9 @@
   <ng-container *ngIf='res.data;else notificationTemplate;'>
     <div class="position-relative" *ngFor="let place of res.data">
       <place-card [data]='place'></place-card>
-      <ion-fab vertical="bottom" horizontal="end" *ngIf='enableSelection'>
-        <ion-fab-button (click)='onSelect(place)'>
-          <ion-icon name="add"></ion-icon>
+      <ion-fab vertical="top" horizontal="end" *ngIf='enableSelection'>
+        <ion-fab-button (click)='onSelect(place)' color='secondary'>
+          <ion-icon name="checkmark-circle"></ion-icon>
         </ion-fab-button>
       </ion-fab>
     </div>

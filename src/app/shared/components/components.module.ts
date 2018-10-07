@@ -25,6 +25,7 @@ import { RatingsModule } from "../features/ratings/ratings.module";
 import { RouterModule } from "@angular/router";
 import { CardCompanionComponent } from './card-companion/card-companion.component';
 import { ReviewModule } from "../../review/review.module";
+import { ChatPageModule } from "../../chat/chat.module";
 
 const MODALS = [
   ReportingFormComponent,
@@ -58,7 +59,8 @@ const COMPS = [
     KhMapsModule,
     RatingsModule,
     RouterModule,
-    ReviewModule
+    ReviewModule,
+    ChatPageModule
   ],
   declarations: [...COMPS, LocationDirective, ImageDirective],
   exports: [...COMPS, LocationDirective, ImageDirective],

@@ -46,9 +46,9 @@
             <ion-item>
               <ion-label text-wrap>
                 <ion-text color="dark">
-                  <h2>{{review.ReviewText}}</h2>
-                  <ion-note>by {{review.User.FullName}}</ion-note>
                   <kh-ratings [rating]='review.Rating'></kh-ratings>
+                  <h2>by {{review.User.FullName}}</h2>
+                  <p>{{review.ReviewText}}</p>
                 </ion-text>
               </ion-label>
             </ion-item>

@@ -4,7 +4,7 @@ import { LoadingController, ToastController } from "@ionic/angular";
 import {
   AngularFireUploadTask,
   AngularFireStorage
-} from "angularfire2/storage";
+} from "@angular/fire/storage";
 import { finalize } from "rxjs/operators";
 import { ImageDirective } from "../../shared/image.directive";
 import { UserService } from "../../shared/services/user.service";

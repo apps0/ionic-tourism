@@ -7,15 +7,13 @@
       <ion-text color="primary">
         <h1>{{place.Name}}</h1>
       </ion-text>
-      <p text-wrap>Description:{{place.Description}}</p>
+      <p class="nowrap">Description:{{place.Description}}</p>
       <p text-wrap>Address:{{place.Address}}</p>
-      <ion-text color='secondary' *ngIf='place?.CreatedAt'>
-        Added At {{place?.CreatedAt.toDate()|date}}
-      </ion-text>
     </ion-label>
     <ion-fab-button [appLocation]='place?.LatLng' color='secondary' slot='end'>
       <ion-icon name="compass"></ion-icon>
     </ion-fab-button>
+
   </ion-item>
 </ng-container>
 <ng-template #largeTemplate>
@@ -26,9 +24,10 @@
     </div>
     <ion-card-header class="place-header">
       <ion-card-title class="capitalize">{{place.Name}}</ion-card-title>
-      <ion-card-subtitle>{{place.Description}}</ion-card-subtitle>
+
+      <kh-ratings [rating]='getAvgRating(place)' [itemId]='place.Id' reviewModal [reviewItemId]='place.Id' reviewItemType='place' [disableWrite]='!reviewWrite'></kh-ratings>
       <ion-fab vertical="top" horizontal="end" edge>
-        <ion-fab-button [appLocation]='place?.LatLng' color='secondary'>
+        <ion-fab-button [appLocation]='place?.LatLng' color='light'>
           <ion-icon name="compass"></ion-icon>
         </ion-fab-button>
         <!-- <ion-fab-button (click)='onSelect(place)' *ngIf='enableSelection'>
@@ -37,7 +36,7 @@
       </ion-fab>
     </ion-card-header>
     <ion-card-content>
-        <kh-ratings [rating]='getAvgRating(place)' [itemId]='place.Id' reviewModal [reviewItemId]='place.Id' reviewItemType='place' [disableWrite]='!reviewWrite'></kh-ratings>
+      <p>{{place.Description}}</p>
     </ion-card-content>
   </ion-card>
 </ng-template>

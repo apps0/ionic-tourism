@@ -23,17 +23,6 @@ export class AdminPage implements OnInit {
   ngOnInit() {}
 
   async logOut() {
-    const loading = await this.loadingController.create({
-      content: "Processing..."
-    });
-    loading.present();
-    this.authService
-      .logOut()
-      .pipe(take(1))
-      .subscribe(res => {
-        this.router.navigate(["/home"]).then(() => {
-          loading.dismiss();
-        });
-      });
+    this.authService.logOut();
   }
 }

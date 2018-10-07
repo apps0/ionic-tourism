@@ -3,9 +3,9 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreDocument
-} from "angularfire2/firestore";
+} from "@angular/fire/firestore";
 import { User, UserRole } from "../models";
-import { Observable, of } from "rxjs";
+import { Observable, of, Observer } from "rxjs";
 import { take, tap, map, share, distinctUntilChanged } from "rxjs/operators";
 import { FirestoreService } from "./firestore.service";
 import { BehaviorSubject } from "rxjs";
@@ -18,9 +18,7 @@ export class UserService {
 
   userSubject: BehaviorSubject<User> = new BehaviorSubject(null);
 
-  currentUser$: Observable<User> = this.userSubject
-    .asObservable()
-    .pipe(distinctUntilChanged());
+  currentUser$: Observable<User> = this.userSubject.asObservable();
 
   isLoggedIn$: Observable<boolean> = this.userSubject
     .asObservable()
@@ -117,21 +115,18 @@ export class UserService {
     );
   }
   logOut() {
-    return of(true)
-    .pipe(
-      tap(() => {
-        window.localStorage.removeItem("user");
-        this.userSubject.next(null);
-      })
-    );
+    this.router.navigate(["/home"]).then(()=>{
+      this.userSubject.next(null);
+      window.localStorage.removeItem("user");
+    })
   }
 
-  getById(productId: string): any {
+  getById(docId: string): any {
     return this.firestoreService.docWithId$(
-      `${this.userCollectionName}/${productId}`
+      `${this.userCollectionName}/${docId}`
     );
   }
-  updateDoc(updatedUser,docId): any {
+  updateDoc(updatedUser, docId): any {
     this.firestoreService.update(
       `${this.userCollectionName}/${docId}`,
       updatedUser

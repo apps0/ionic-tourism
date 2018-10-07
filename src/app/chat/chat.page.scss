@@ -1,0 +1,13 @@
+ion-footer {
+    display: flex;
+    ion-input {
+      flex: 1;
+    }
+    background-color: #fff;
+  }
+  span.time{
+    float:right;
+    font-size: .8em;
+    color: #aaa;
+  }
+  

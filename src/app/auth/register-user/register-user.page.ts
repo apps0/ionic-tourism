@@ -54,6 +54,7 @@ export class RegisterUserPage implements OnInit {
       this.userService.register(data)
       .then((res)=>{
         this.presentLoading(false);
+        this.registerForm.reset();
         this.presentToast("Registration successfull ."); 
       })
       .catch((err)=>{

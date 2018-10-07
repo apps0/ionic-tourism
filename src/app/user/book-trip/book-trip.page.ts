@@ -12,6 +12,7 @@ import { SelectFnaComponent } from "../../shared/components/select-fna/select-fn
 import { SelectVehicleComponent } from "../../shared/components/select-vehicle/select-vehicle.component";
 import { SelectCompanionComponent } from "../../shared/components/select-companion/select-companion.component";
 import { SelectPlacesComponent } from "../../shared/components/select-places/select-places.component";
+import { Router, NavigationStart, Event } from "@angular/router";
 
 @Component({
   selector: "app-book-trip",
@@ -19,6 +20,7 @@ import { SelectPlacesComponent } from "../../shared/components/select-places/sel
   styleUrls: ["./book-trip.page.scss"]
 })
 export class BookTripPage implements OnInit {
+  minDate = new Date().toJSON().split("T")[0];
   selectedPlace: Place = null;
   selectedCompanion: any = null;
   selectedVehicle: any = null;
@@ -26,34 +28,58 @@ export class BookTripPage implements OnInit {
   registerForm: FormGroup;
   loading;
   user;
+  submitted = false;
   constructor(
     private fb: FormBuilder,
     public loadingController: LoadingController,
     public toastController: ToastController,
     private tripService: TripService,
     private userService: UserService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private router: Router
   ) {
     this.createForm();
     this.userService.currentUser$.subscribe(user => (this.user = user));
   }
 
+  dismissModalOnRouteChange() {
+    this.router.events.subscribe((routerEvent: Event) => {
+      if (routerEvent instanceof NavigationStart) {
+        console.log("Navigation started");
+        this.modalController.dismiss();
+      }
+    });
+  }
   ngOnInit() {}
 
   createForm() {
-    this.registerForm = this.fb.group({
-      startDate: ["", Validators.required],
-      endDate: ["", Validators.required],
-      totalMembers: ["", Validators.required],
-      latLng: ["", Validators.required],
-      fromAddress: ["", Validators.required],
-      isCompanionSelected: ["", Validators.required],
-      isFnaSelected: ["", Validators.required],
-      isPlaceSelected: ["", Validators.required],
-      isVehicleSelected: ["", Validators.required]
-    });
+    this.registerForm = this.fb.group(
+      {
+        startDate: ["", Validators.required],
+        endDate: ["", Validators.required],
+        totalMembers: ["", Validators.required],
+        latLng: ["", Validators.required],
+        fromAddress: ["", Validators.required],
+        isCompanionSelected: ["", Validators.required],
+        isFnaSelected: ["", Validators.required],
+        isPlaceSelected: ["", Validators.required],
+        isVehicleSelected: ["", Validators.required]
+      },
+      { validator: this.dateLessThan("startDate", "endDate") }
+    );
   }
-
+  dateLessThan(from: string, to: string) {
+    return (group: FormGroup): { [key: string]: any } => {
+      let s = group.controls[from];
+      let e = group.controls[to];
+      if (s.value > e.value) {
+        return {
+          dates: true
+        };
+      }
+      return {};
+    };
+  }
   onLocationSelect(location) {
     if (location) {
       this.registerForm.get("latLng").setValue(JSON.stringify(location));
@@ -90,24 +116,28 @@ export class BookTripPage implements OnInit {
     return data;
   }
 
-  onSave() {
+  async onSave() {
+    this.submitted = true;
     if (this.registerForm.valid) {
+      const loading = await this.loadingController.create({
+        content: "Processing..."
+      });
       // this.presentLoading(true);
       let data = this.prepareSaveInfo();
 
       console.log(data);
       if (data.UserId) {
-        this.presentLoading(true);
+        loading.present();
         this.tripService
           .register(data)
           .then(res => {
-            this.presentLoading(false);
+            loading.dismiss();
             this.presentToast("Registration Successfull .");
             this.resetAll();
             console.log(res);
           })
           .catch(err => {
-            this.presentLoading(false);
+            loading.dismiss();
             console.log(err);
             this.presentToast("Something went wrong .");
           });
@@ -115,24 +145,15 @@ export class BookTripPage implements OnInit {
         this.presentToast("Login Required .");
       }
     } else {
-      this.presentToast("Please fill all the required fields .");
+      this.checkFormErrors();
     }
   }
 
-  async presentLoading(show) {
-    if (show) {
-      this.loading = await this.loadingController.create({
-        content: "Processing..."
-      });
-      return await this.loading.present();
-    } else if (this.loading) {
-      return await this.loading.dismiss();
-    }
-  }
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000
+      duration: 2000,
+      position: "top"
     });
     toast.present();
   }
@@ -189,11 +210,47 @@ export class BookTripPage implements OnInit {
     });
     return await modal.present();
   }
+
+  checkFormErrors() {
+    let invalidForms = " ";
+    Object.keys(this.registerForm.controls).forEach((key: string) => {
+      const abstractControl = this.registerForm.controls[key];
+      if (abstractControl.invalid) {
+        switch (key) {
+          case "isCompanionSelected":
+            invalidForms += ", Companion";
+            break;
+          case "isFnaSelected":
+            invalidForms += ", Food and Accomodation";
+            break;
+          case "isPlaceSelected":
+            invalidForms += ", Trip Location";
+            break;
+          case "isVehicleSelected":
+            invalidForms += ", Your Vehicle";
+            break;
+          default:
+            break;
+        }
+      }
+    });
+    if (invalidForms.trim().length > 0) {
+      invalidForms = invalidForms.substr(2);
+      this.presentToast(
+        `Please select ${invalidForms.substring(
+          1,
+          invalidForms.length
+        )} using the plus button.`
+      );
+    }
+  }
+
   private resetAll() {
     this.registerForm.reset();
     this.selectedCompanion = null;
     this.selectedVehicle = null;
     this.selectedPlace = null;
     this.selectedFna = null;
+    this.submitted = false;
   }
 }

@@ -11,6 +11,31 @@ import { UserService } from "../../services/user.service";
 export class UserCardComponent implements OnInit {
   userRoles = UserRole;
   userImage: string = "/assets/user.png";
+  @Input()
+  get mini(): boolean {
+    return this._mini;
+  }
+  set mini(value: boolean) {
+    this._mini = coerceBooleanProperty(value);
+  }
+  private _mini = false;
+  @Input()
+  get chat(): boolean {
+    return this._chat;
+  }
+  set chat(value: boolean) {
+    this._chat = coerceBooleanProperty(value);
+  }
+  private _chat = false;
+  @Input()
+  get noReview(): boolean {
+    return this._noReview;
+  }
+  set noReview(value: boolean) {
+    this._noReview = coerceBooleanProperty(value);
+  }
+  private _noReview = false;
+
   @Input("data")
   user: User;
   @Input()
@@ -39,8 +64,7 @@ export class UserCardComponent implements OnInit {
         this.user.Gender === "female"
           ? "/assets/companion-female.jpg"
           : "/assets/companion-male.jpg";
-    }
-    else if (this.user.Role === UserRole.FoodProvider) {
+    } else if (this.user.Role === UserRole.FoodProvider) {
       this.userImage = "/assets/fna.jpg";
     }
 

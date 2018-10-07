@@ -7,7 +7,7 @@ import {
 } from "@angular/router";
 import { Observable } from "rxjs";
 import { take, map, tap } from "rxjs/operators";
-import { TripService } from "../../shared/services/trip.service";
+import { TripService } from "../shared/services/trip.service";
 
 @Injectable({
   providedIn: "root"

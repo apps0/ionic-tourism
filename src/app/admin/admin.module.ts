@@ -24,7 +24,7 @@ const routes: Routes = [
     path: "register-fna-type",
     loadChildren:
       "./register-fna-type/register-fna-type.module#RegisterFnaTypePageModule"
-  },
+  }
 ];
 
 @NgModule({

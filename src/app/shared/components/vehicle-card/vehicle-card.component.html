@@ -8,11 +8,6 @@
         <h1 class="capitalize">{{vehicle.Name}}</h1>
       </ion-text>
       <p text-wrap>SeatingCapacity:{{vehicle.SeatingCapacity}}</p>
-      <ion-text color='secondary' *ngIf='user?.CreatedAt'>
-        Added At {{vehicle?.CreatedAt.toDate()|date}}
-      </ion-text>
-      <kh-ratings [rating]='getAvgRating(vehicle)' [itemId]='vehicle.Id' reviewModal [reviewItemId]='vehicle.Id' reviewItemType='vehicle'
-        [disableWrite]='!reviewWrite'></kh-ratings>
     </ion-label>
   </ion-item>
 </ng-container>
@@ -27,14 +22,13 @@
       <ion-card-subtitle>Seating Capacity:{{vehicle.SeatingCapacity}}</ion-card-subtitle>
       <ion-card-subtitle>Charge :Rs {{vehicle.Charge}} (per hour rate)</ion-card-subtitle>
       <p text-wrap>Other Features:{{vehicle.Facilities}}</p>
+      <ion-label>
+        <!-- <ion-text color='secondary' *ngIf='vehicle?.CreatedAt' slot='end'>
+          <p> Added At {{vehicle?.CreatedAt.toDate()|date}}</p>
+        </ion-text> -->
+        <kh-ratings [rating]='getAvgRating(vehicle)' [itemId]='vehicle.Id' reviewModal [reviewItemId]='vehicle.Id'
+          reviewItemType='vehicle'></kh-ratings>
+      </ion-label>
     </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-text color='secondary' *ngIf='vehicle?.CreatedAt' slot='end'>
-          Added At {{vehicle?.CreatedAt.toDate()|date}}
-        </ion-text>
-        <kh-ratings [rating]='getAvgRating(vehicle)' [itemId]='vehicle.Id' reviewModal [reviewItemId]='vehicle.Id' reviewItemType='vehicle'></kh-ratings>
-      </ion-item>
-    </ion-card-content>
   </ion-card>
 </ng-template>

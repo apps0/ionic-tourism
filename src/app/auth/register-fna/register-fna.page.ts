@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import {
   AngularFireStorage,
   AngularFireUploadTask
-} from "angularfire2/storage";
+} from "@angular/fire/storage";
 import { finalize } from "rxjs/operators";
 import { UserService } from "../../shared/services/user.service";
 import { User, UserRole } from "../../shared/models";

@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import { ActionSheetController } from "@ionic/angular";
-import { AngularFireStorage } from "angularfire2/storage";
+import { AngularFireStorage } from "@angular/fire/storage";
 import { finalize } from "rxjs/operators";
 @Directive({
   selector: "[appImage]"

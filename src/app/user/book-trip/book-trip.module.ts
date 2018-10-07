@@ -20,9 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    RouterModule.forChild(routes),
     SharedModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
   ],
   declarations: [BookTripPage]
 })

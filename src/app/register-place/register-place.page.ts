@@ -5,7 +5,7 @@ import { finalize } from "rxjs/operators";
 import {
   AngularFireUploadTask,
   AngularFireStorage
-} from "angularfire2/storage";
+} from "@angular/fire/storage";
 import { PlaceService } from "../shared/services/place.service";
 import { Place } from "../shared/models/place";
 

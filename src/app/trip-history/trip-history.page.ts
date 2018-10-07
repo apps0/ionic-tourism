@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { catchError, switchMap, map } from "rxjs/operators";
-import { TripService } from "../../shared/services/trip.service";
-import { UserService } from "../../shared/services/user.service";
+import { TripService } from "../shared/services/trip.service";
+import { UserService } from "../shared/services/user.service";
+import { User, UserRole } from "../shared/models";
 
 @Component({
   selector: "app-trip-history",
@@ -20,9 +21,12 @@ export class TripHistoryPage implements OnInit {
   ngOnInit() {
     this.userService.currentUser$
       .pipe(
-        switchMap(user => {
+        switchMap((user:User) => {
           // return this.tripService.getAllUserTrips("HqfugBhiIDFo0dHxi1g7");
-          return this.tripService.getAllUserTrips(user.Id);
+            if(user.Role==UserRole.Admin){
+            return this.tripService.getAll();
+          }
+          else return this.tripService.getAllUserTrips(user.Id);
         })
       )
       .pipe(

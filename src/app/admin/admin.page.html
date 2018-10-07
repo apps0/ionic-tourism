@@ -36,6 +36,18 @@
         FNA Types
       </div>
     </ion-card>
+    <ion-card class="col-item" [routerLink]="['/chat-lists']">
+      <ion-icon name="chatbubbles" color='primary'></ion-icon>
+      <div class="col-label">
+        Chats
+      </div>
+    </ion-card>
+    <ion-card class="col-item" [routerLink]="['/trip-history']">
+      <ion-icon name="chatbubbles" color='primary'></ion-icon>
+      <div class="col-label">
+        Trips
+      </div>
+    </ion-card>
     <ion-card class="col-item" (click)='logOut()'>
       <ion-icon name="log-out" color='danger'></ion-icon>
       <div class="col-label">

@@ -35,32 +35,41 @@
         <ion-text color="primary">
           <h2>START DATE</h2>
         </ion-text>
+        <div *ngIf="registerForm.get('startDate')?.errors && (submitted || registerForm.get('startDate')?.touched)">
+          <p class='text-error' *ngIf="registerForm.get('startDate').errors.required">Starting Date is required .</p>
+        </div>
       </ion-label>
     </ion-item-divider>
     <ion-item>
-      <!-- <ion-datetime min="2017" max="2020-10-31" formControlName='startDate' display-format="MMM DD, YYYY HH:mm" placeholder='select a starting date '></ion-datetime> -->
-      <input type="date" formControlName='startDate'>
+      <input type="date" class="date-input" formControlName='startDate' [min]='minDate'>
     </ion-item>
     <ion-item-divider>
       <ion-label>
         <ion-text color="primary">
-          <h2>END DATE</h2>
+          <h2>END DATE </h2>
         </ion-text>
+        <div *ngIf="(registerForm.errors || registerForm.get('endDate')?.errors) && (submitted || registerForm.get('endDate')?.touched)">
+          <p class='text-error' *ngIf="registerForm.get('endDate').errors?.required">Ending Date is required .</p>
+          <p class='text-error' *ngIf="registerForm.errors?.dates && !registerForm.get('endDate').errors?.required">Invalid End date </p>
+        </div>
       </ion-label>
     </ion-item-divider>
     <ion-item>
-      <!-- <ion-datetime min="2017" max="2020-10-31" formControlName='endDate' placeholder='select an end date ' display-format="MMM DD, YYYY HH:mm"></ion-datetime> -->
-      <input type="date" formControlName='endDate'>
+      <input type="date" class="date-input" formControlName='endDate' [min]='minDate'>
     </ion-item>
     <ion-item-divider>
       <ion-label>
         <ion-text color="primary">
           <h2>HOW MANY ?</h2>
         </ion-text>
+        <div *ngIf="registerForm.get('totalMembers')?.errors && (submitted || registerForm.get('totalMembers')?.touched)">
+          <p class='text-error' *ngIf="registerForm.get('totalMembers').errors.required">Total member count is required
+            .</p>
+        </div>
       </ion-label>
     </ion-item-divider>
     <ion-item>
-      <ion-input formControlName='totalMembers' type="text" placeholder="6"></ion-input>
+      <ion-input formControlName='totalMembers' type="number" placeholder="6"></ion-input>
     </ion-item>
     <ion-item-divider>
       <ion-label>
@@ -68,6 +77,9 @@
           <h2> BOARDING ADDRESS FROM MAP</h2>
         </ion-text>
         <p>Latitude and longitude .</p>
+        <div *ngIf="registerForm.get('latLng')?.errors && (submitted || registerForm.get('latLng')?.touched)">
+          <p class='text-error' *ngIf="registerForm.get('latLng').errors.required">Lat & Lng is required.</p>
+        </div>
       </ion-label>
       <ion-fab-button appLocation enableSelection='true' color='secondary' (onSelect)='onLocationSelect($event)'>
         <ion-icon name="compass"></ion-icon>
@@ -82,6 +94,9 @@
         <ion-text color="primary">
           <h2>BOARDING ADDRESS</h2>
         </ion-text>
+        <div *ngIf="registerForm.get('fromAddress')?.errors && (submitted || registerForm.get('fromAddress')?.touched)">
+          <p class='text-error' *ngIf="registerForm.get('fromAddress').errors.required">From Address is required.</p>
+        </div>
       </ion-label>
     </ion-item-divider>
     <ion-item>
@@ -91,13 +106,13 @@
       <place-card mini="true" [data]='selectedPlace'></place-card>
     </ng-container>
     <ng-container *ngIf='selectedCompanion'>
-      <user-card [data]='selectedCompanion'></user-card>
+      <user-card [data]='selectedCompanion' mini></user-card>
     </ng-container>
     <ng-container *ngIf='selectedVehicle'>
       <vehicle-card mini="true" [data]='selectedVehicle'></vehicle-card>
     </ng-container>
     <ng-container *ngIf='selectedFna'>
-      <user-card [data]='selectedFna'></user-card>
+      <user-card [data]='selectedFna' mini></user-card>
     </ng-container>
     <input type="hidden" formControlName='isPlaceSelected'>
     <input type="hidden" formControlName='isVehicleSelected'>

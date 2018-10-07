@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Vehicle } from "../../models/vehicle";
 import { VehicleService } from "../../services/vehicle.service";
 import { ImageDirective } from "../../image.directive";
-import { AngularFireStorage, AngularFireUploadTask } from "angularfire2/storage";
+import { AngularFireStorage, AngularFireUploadTask } from "@angular/fire/storage";
 import { finalize } from "rxjs/operators";
 
 @Component({
